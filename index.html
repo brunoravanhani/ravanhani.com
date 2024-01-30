@@ -8,9 +8,37 @@
     <style>
         body {
             font-family: Arial, sans-serif;
-            margin: 20px;
-            padding: 20px;
+            margin: 0;
+            padding: 0;
             background-color: #f4f4f4;
+        }
+
+        header {
+            background-color: #333;
+            color: white;
+            padding: 15px;
+            text-align: center;
+        }
+        
+        main {
+            padding: 20px;
+        }
+
+        nav {
+            display: flex;
+            justify-content: center;
+            background-color: #666;
+        }
+
+        nav a {
+            color: white;
+            text-decoration: none;
+            padding: 10px 20px;
+            display: inline-block;
+        }
+
+        nav a:hover {
+            background-color: #444;
         }
 
         header {
@@ -58,42 +86,51 @@
 <body>
 
     <header>
-        <h1>Bruno Ravanhani</h1>
-        <img src="your_photo.jpg" alt="Your Photo">
-        <p>Software Engineer</p>
+        <h1>Your Page</h1>
     </header>
 
-    <section>
-        <h2>About Me</h2>
-        <p>
-            Hello! I am a passionate software engineer with expertise in various technologies. I love to tackle
-            challenging problems and create efficient solutions. Let's build something amazing together!
-        </p>
-    </section>
-
-    <section>
-        <h2>Skills</h2>
-        <ul>
-            <li>
-                <strong>Programming Languages:</strong>
-                <span class="skill-level">Java</span>
-                <span class="skill-level">Python</span>
-                <span class="skill-level">JavaScript</span>
-            </li>
-            <li>
-                <strong>Web Development:</strong>
-                <span class="skill-level">HTML/CSS</span>
-                <span class="skill-level">React</span>
-                <span class="skill-level">Node.js</span>
-            </li>
-            <li>
-                <strong>Database:</strong>
-                <span class="skill-level">MySQL</span>
-                <span class="skill-level">MongoDB</span>
-            </li>
-            <!-- Add more skills as needed -->
-        </ul>
-    </section>
+    <nav>
+        <a href="#about">About</a>
+        <a href="#skills">Skills</a>
+        <a href="#experience">Experience</a>
+        <a href="#contact">Contact</a>
+        <a href="#hobbies">Hobbies</a>
+    </nav>
+ 
+    <main>
+        <section>
+            <h2>About Me</h2>
+            <p>
+                Hello! I am a passionate software engineer with expertise in various technologies. I love to tackle
+                challenging problems and create efficient solutions. Let's build something amazing together!
+            </p>
+        </section>
+    
+        <section>
+            <h2>Skills</h2>
+            <ul>
+                <li>
+                    <strong>Programming Languages:</strong>
+                    <span class="skill-level">Java</span>
+                    <span class="skill-level">Python</span>
+                    <span class="skill-level">JavaScript</span>
+                </li>
+                <li>
+                    <strong>Web Development:</strong>
+                    <span class="skill-level">HTML/CSS</span>
+                    <span class="skill-level">React</span>
+                    <span class="skill-level">Node.js</span>
+                </li>
+                <li>
+                    <strong>Database:</strong>
+                    <span class="skill-level">MySQL</span>
+                    <span class="skill-level">MongoDB</span>
+                </li>
+                <!-- Add more skills as needed -->
+            </ul>
+        </section>    
+    </main>
+    
 
 </body>
 
