@@ -1,137 +1,223 @@
-<!DOCTYPE html>
-<html lang="en">
-
+<!doctype html>
+<html lang="PT-br">
 <head>
-    <meta charset="UTF-8">
-    <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Bruno Ravanhani - Software Engineer</title>
-    <style>
-        body {
-            font-family: Arial, sans-serif;
-            margin: 0;
-            padding: 0;
-            background-color: #f4f4f4;
-        }
+  <title>Bruno Ravanhani</title>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="description" content="Página de Bruno Ravanhani">
+  <meta name="author" content="Bruno Ravanhani">
 
-        header {
-            background-color: #333;
-            color: white;
-            padding: 15px;
-            text-align: center;
-        }
-        
-        main {
-            padding: 20px;
-        }
+  <!--    https://www.quicksprout.com/open-graph-tags/ - Open Graph Tags-->
+  <meta name="title" property="og:title" content="bruno Ravanhani"/>
+  <meta name="type" property="og:type" content="website"/>
+  <meta name="url" property="og:url" content="https://bruno.ravanhani.com"/>
+  <meta name="description" property="og:description" content="Página pessoal de Bruno Ravanhani"/>
 
-        nav {
-            display: flex;
-            justify-content: center;
-            background-color: #666;
-        }
+  <link rel="canonical" href="https://bruno.ravanhani.com/">
+  <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
+  <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
 
-        nav a {
-            color: white;
-            text-decoration: none;
-            padding: 10px 20px;
-            display: inline-block;
-        }
+  <!-- Favicons -->
+  <link rel="apple-touch-icon" sizes="180x180" href="/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="/favicon-16x16.png">
+  <link rel="manifest" href="/site.webmanifest">
+  <link rel="mask-icon" href="/safari-pinned-tab.svg" color="#5bbad5">
+  <meta name="msapplication-TileColor" content="#da532c">
+  <meta name="theme-color" content="#ffffff">
 
-        nav a:hover {
-            background-color: #444;
-        }
+  <style>
+      .bd-placeholder-img {
+        font-size: 1.125rem;
+        text-anchor: middle;
+        -webkit-user-select: none;
+        -moz-user-select: none;
+        user-select: none;
+      }
 
-        header {
-            text-align: center;
+      @media (min-width: 768px) {
+        .bd-placeholder-img-lg {
+          font-size: 3.5rem;
         }
+      }
 
-        img {
-            border-radius: 50%;
-            max-width: 150px;
-            height: auto;
-        }
+      .b-example-divider {
+        height: 3rem;
+        background-color: rgba(0, 0, 0, .1);
+        border: solid rgba(0, 0, 0, .15);
+        border-width: 1px 0;
+        box-shadow: inset 0 .5em 1.5em rgba(0, 0, 0, .1), inset 0 .125em .5em rgba(0, 0, 0, .15);
+      }
 
-        section {
-            margin-top: 20px;
-        }
+      .b-example-vr {
+        flex-shrink: 0;
+        width: 1.5rem;
+        height: 100vh;
+      }
 
-        h2 {
-            color: #333;
-        }
+      .bi {
+        vertical-align: -.125em;
+        fill: currentColor;
+      }
 
-        p {
-            color: #666;
-        }
+      .nav-scroller {
+        position: relative;
+        z-index: 2;
+        height: 2.75rem;
+        overflow-y: hidden;
+      }
 
-        ul {
-            list-style-type: none;
-            padding: 0;
-        }
+      .nav-scroller .nav {
+        display: flex;
+        flex-wrap: nowrap;
+        padding-bottom: 1rem;
+        margin-top: -1px;
+        overflow-x: auto;
+        text-align: center;
+        white-space: nowrap;
+        -webkit-overflow-scrolling: touch;
+      }
 
-        li {
-            margin-bottom: 5px;
-        }
+       .card {
+        height: 100%;
+        display: flex;
+      }
 
-        .skill-level {
-            display: inline-block;
-            background-color: #4CAF50;
-            color: white;
-            padding: 3px 8px;
-            border-radius: 5px;
-            margin-right: 5px;
-        }
+      .card-block {
+          display: flex;
+          justify-content: space-between;
+          flex-direction: column;
+      }
+
+      .card.card-footer {
+          align-self: flex-end;
+          flex: 1 1 auto;
+      }
     </style>
 </head>
-
 <body>
 
-    <header>
-        <h1>Your Page</h1>
-    </header>
+<header>
+  <div class="collapse bg-dark" id="navbarHeader">
+    <div class="container">
+      <div class="row">
+        <div class="col-sm-8 col-md-7 py-4">
+          <h4 class="text-white">Sobre mim</h4>
+          <p class="text-white">Eu sou um desenvolvedor de Software FullStack com experiência em .NET, React, Angular, SQL e AWS</p>
+        </div>
+        <div class="col-sm-4 offset-md-1 py-4">
+          <h4 class="text-white">Menu</h4>
+          <ul class="list-unstyled">
+            <li><a href="https://bruno.ravanhani.com/" class="text-white">Home</a></li>
+            <li><a href="#portfolio" class="text-white">Projetos</a></li>
+            <li><a href="#contactMe" class="text-white">Contato</a></li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="navbar navbar-dark bg-dark shadow-sm">
+    <div class="container">
+      <a href="https://bruno.ravanhani.com" class="navbar-brand d-flex align-items-center">
+        <strong>Bruno Ravanhani</strong>
+      </a>
+      <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarHeader" aria-controls="navbarHeader" aria-expanded="false" aria-label="Toggle navigation">
+        <span class="navbar-toggler-icon"></span>
+      </button>
+    </div>
+  </div>
+</header>
 
-    <nav>
-        <a href="#about">About</a>
-        <a href="#skills">Skills</a>
-        <a href="#experience">Experience</a>
-        <a href="#contact">Contact</a>
-        <a href="#hobbies">Hobbies</a>
-    </nav>
- 
-    <main>
-        <section>
-            <h2>About Me</h2>
-            <p>
-                Hello! I am a passionate software engineer with expertise in various technologies. I love to tackle
-                challenging problems and create efficient solutions. Let's build something amazing together!
-            </p>
-        </section>
-    
-        <section>
-            <h2>Skills</h2>
-            <ul>
-                <li>
-                    <strong>Programming Languages:</strong>
-                    <span class="skill-level">Java</span>
-                    <span class="skill-level">Python</span>
-                    <span class="skill-level">JavaScript</span>
-                </li>
-                <li>
-                    <strong>Web Development:</strong>
-                    <span class="skill-level">HTML/CSS</span>
-                    <span class="skill-level">React</span>
-                    <span class="skill-level">Node.js</span>
-                </li>
-                <li>
-                    <strong>Database:</strong>
-                    <span class="skill-level">MySQL</span>
-                    <span class="skill-level">MongoDB</span>
-                </li>
-                <!-- Add more skills as needed -->
-            </ul>
-        </section>    
-    </main>
-    
+<main class="overflow-scroll">
+  <div id="myCarousel" class="carousel slide" data-bs-ride="carousel">
+    <div class="carousel-indicators">
+      <button type="button" data-bs-target="#myCarousel" data-bs-slide-to="0" class="active" aria-current="true" aria-label="Slide 1"></button>
+    </div>
+    <div class="carousel-inner">
+      <div class="carousel-item active" style="text-align: center;">
+        <img class="bd-placeholder-img" width="80%" height="100%" src="images/Brunoravanhani-banner.jpg" aria-hidden="true" preserveAspectRatio="xMidYMid slice" focusable="false"></img>
+      </div>
+    </div>
+    <button class="carousel-control-prev" type="button" data-bs-target="#myCarousel" data-bs-slide="prev">
+      <span class="carousel-control-prev-icon" style="background-image: url(images/Left_Arrow.svg);}" aria-hidden="true"></span>
+      <span class="visually-hidden">Previous</span>
+    </button>
+    <button class="carousel-control-next" type="button" data-bs-target="#myCarousel" data-bs-slide="next">
+      <span class="carousel-control-next-icon" style="background-image: url(images/Right_Arrow.svg);}" aria-hidden="true"></span>
+      <span class="visually-hidden">Next</span>
+    </button>
+  </div>
+  <div class="album py-0 bg-light" id="portfolio">
+    <div class="container">
+      <div class="modal-header p-5 pb-4 border-bottom-0 justify-content-center">
+        <h1 class="fw-bold mb-0 fs-2">Portfolio</h1>
+      </div>
+      <div class="modal-body p-5 pt-0">
+        <div class="row row-cols-1 row-cols-sm-2 row-cols-md-3 g-3">
+          <div class="col">
+            <div class="card shadow-sm">
+              <img class="bd-placeholder-img card-img-top w-50 mx-auto pt-3" src="images/LinkedIn_Logo.png" role="img" aria-label="Placeholder: LinkedIn Logo" preserveAspectRatio="xMidYMid slice" focusable="false"><title>LinkedIn</title></img>
+              <div class="card-body">
+                <p class="card-text">No meu Linkedin é possível ver mais sobre as minhas esperiências e preferências profissionais</p>
+              </div>
+              <div class="card-footer justify-content-between align-items-center text-center">
+                <a href="https://www.linkedin.com/in/bruno-ravanhani" class="btn btn-primary" target="_blank">LinkedIn</a>
+              </div>
+            </div>
+          </div>
+          <div class="col">
+            <div class="card shadow-sm">
+              <img class="bd-placeholder-img card-img-top w-50 mx-auto pt-3" src="images/GitHub_Logo.png" role="img" aria-label="Placeholder: GitHub Logo" preserveAspectRatio="xMidYMid slice" focusable="false"><title>GitHub</title></img>
+              <div class="card-body">
+                <p class="card-text">No GitHub eu adiciono alguns dos meus projetos paralelos e estudos que tenho feito recentemente.</p>
+              </div>
+              <div class="card-footer justify-content-between align-items-center text-center">
+                <a href="https://github.com/brunoravanhani" class="btn btn-primary" target="_blank">GitHub</a>
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+  </div>
+
+  <div class="modal modal-signin position-static d-block bg-dark py-5" tabindex="-1"  id="contactMe">
+    <div class="modal-dialog" role="document">
+      <div class="modal-content rounded-3 shadow">
+        <div class="modal-header p-5 pb-4 border-bottom-0 justify-content-center">
+          <h1 class="fw-bold mb-0 fs-2">Contato</h1>
+        </div>
+
+        <div class="modal-body p-5 pt-0">
+          <form class="" action="" method="POST">
+            <div class="form-floating mb-3">
+              <input type="input" class="form-control rounded-3" id="floatingInputName" placeholder="Nome" required>
+              <label for="floatingInputName">Nome</label>
+            </div>
+            <div class="form-floating mb-3">
+              <input type="email" class="form-control rounded-3" id="floatingInputEmail" placeholder="name@example.com" required>
+              <label for="floatingInputEmail">Email</label>
+            </div>
+            <div class="form-outline mb-3">
+              <textarea type="text" class="form-control rounded-3" placeholder="Mensagem" rows="7" required></textarea>
+            </div>
+            <button class="w-100 mb-2 btn btn-lg rounded-3 btn-primary" type="submit">Enviar</button>
+          </form>
+        </div>
+      </div>
+    </div>
+  </div>
+</main>
+
+<footer class="text-muted py-3">
+  <div class="container">
+    <p class="float-end mb-1">
+      <a href="#">Back to top</a>
+    </p>
+    <p class="mb-1">Copyright ©2024 Bruno Ravanhani</p>
+  </div>
+</footer>
 
 </body>
-
 </html>
