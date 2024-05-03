@@ -20,5 +20,5 @@ module "website_s3_bucket_upload" {
   source = "./modules/aws-upload-site-s3"
 
   bucket_name = "bruno-ravanhani-static-site"
-  path = "C:\\Projetos\\other-projects\\o\\ravanhani.com\\www"
+  path = var.content_path
 }

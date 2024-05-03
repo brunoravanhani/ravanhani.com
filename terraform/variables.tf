@@ -4,3 +4,8 @@ variable "folders" {
   type        = set(string)
   default = ["images", "css"]
 }
+
+variable "content_path" {
+  description = "Path of the content site"
+  type        = string
+}
