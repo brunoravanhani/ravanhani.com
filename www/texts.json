@@ -1,14 +1,28 @@
 {
-    "en": {
+    "pt": {
         "title": "Desenvolvedor Fullstack | .NET & React",
         "aboutMeTitle": "Sobre mim",
         "aboutMe": "Sou um desenvolvedor software com quase 10 anos de experiência, minhas especialidades são construir apis com .NET, aplicações front-end com React, bancos de dados relacionais e cloud AWS.",
-        "projectsTitle": "Projetos"
+        "projectsTitle": "Projetos",
+        "childrenMoviesTitle": "Children Movies",
+        "childrenMoviesDescription": "Aplicação construida em Angular que lista filmes infantis com alguns filtros e links para os serviços de streaming. O deploy é realizado com Terraform no Azure Devops e a lista de filmes atualmente é de um json que é retornado por uma Lambda.",
+        "childrenMoviesAction": "Ver Children Movies",
+        "soccerResultsTitle": "Soccer Results",
+        "soccerResultsDescription": "Aplicação com a intenção de listar os últimos resultados de alguns clubes de futebol. Construído usando React com Tailwind css, as informações são buscadas de uma API e deploy é feito via Github Actions para o S3/CloudFront.",
+        "soccerResultsAction": "Ver Soccer Results",
+        "socialTitle": "Redes Sociais"
     },
-    "pt": {
+    "en": {
         "title": "Fullstack Developer | .NET & React",
         "aboutMeTitle": "About Me",
         "aboutMe": "I am a software developer with nearly 10 years of experience. My specialties include building APIs with .NET, front-end applications with React, relational databases, and AWS cloud.",
-        "projectsTitle": "Projects"
+        "projectsTitle": "Projects",
+        "childrenMoviesTitle": "Children Movies",
+        "childrenMoviesDescription": "Application built with Angular that lists children's movies with some filters and links to streaming services. The deployment is done using Terraform in Azure DevOps, and the movie list currently comes from a JSON returned by a Lambda function.",
+        "childrenMoviesAction": "Visit Children Movies",
+        "soccerResultsTitle": "Soccer Results",
+        "soccerResultsDescription": "Application designed to list the latest results of some football clubs. Built using React with Tailwind CSS, the information is fetched from an API, and the deployment is done via GitHub Actions to S3/CloudFront.",
+        "soccerResultsAction": "Visit Soccer Results",
+        "socialTitle": "Social"
     }
 }
