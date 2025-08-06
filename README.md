@@ -1,5 +1,3 @@
 # [bruno.ravanhani.com](https://bruno.ravanhani.com/)
 
-Meu site pessoal hospedado no S3 acessado pelo Cloudfront
-
-Em construção...
+Static site hosted in AWS S3 with CloudFront, deployed using Azure Devops and Terraform.
