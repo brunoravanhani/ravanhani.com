@@ -10,7 +10,8 @@
         "soccerResultsTitle": "Soccer Results",
         "soccerResultsDescription": "Aplicação com a intenção de listar os últimos resultados de alguns clubes de futebol. Construído usando React com Tailwind css, as informações são buscadas de uma API e deploy é feito via Github Actions para o S3/CloudFront.",
         "soccerResultsAction": "Ver Soccer Results",
-        "socialTitle": "Redes Sociais"
+        "socialTitle": "Redes Sociais",
+        "copyright": "© 2025 Bruno Ravanhani. Todos os direitos reservados."
     },
     "en": {
         "title": "Fullstack Developer | .NET & React",
@@ -23,6 +24,7 @@
         "soccerResultsTitle": "Soccer Results",
         "soccerResultsDescription": "Application designed to list the latest results of some football clubs. Built using React with Tailwind CSS, the information is fetched from an API, and the deployment is done via GitHub Actions to S3/CloudFront.",
         "soccerResultsAction": "Visit Soccer Results",
-        "socialTitle": "Social"
+        "socialTitle": "Social",
+        "copyright": "© 2025 Bruno Ravanhani. All rights reserved."
     }
 }
