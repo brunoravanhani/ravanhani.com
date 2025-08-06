@@ -1,0 +1,14 @@
+{
+    "en": {
+        "title": "Desenvolvedor Fullstack | .NET & React",
+        "aboutMeTitle": "Sobre mim",
+        "aboutMe": "Sou um desenvolvedor software com quase 10 anos de experiência, minhas especialidades são construir apis com .NET, aplicações front-end com React, bancos de dados relacionais e cloud AWS.",
+        "projectsTitle": "Projetos"
+    },
+    "pt": {
+        "title": "Fullstack Developer | .NET & React",
+        "aboutMeTitle": "About Me",
+        "aboutMe": "I am a software developer with nearly 10 years of experience. My specialties include building APIs with .NET, front-end applications with React, relational databases, and AWS cloud.",
+        "projectsTitle": "Projects"
+    }
+}

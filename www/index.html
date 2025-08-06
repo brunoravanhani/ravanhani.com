@@ -4,14 +4,14 @@
   <title>Bruno Ravanhani</title>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
-  <meta name="description" content="Página de Bruno Ravanhani">
+  <meta name="description" content="Bruno Ravanhani">
   <meta name="author" content="Bruno Ravanhani">
 
   <!--    https://www.quicksprout.com/open-graph-tags/ - Open Graph Tags-->
   <meta name="title" property="og:title" content="bruno Ravanhani"/>
   <meta name="type" property="og:type" content="website"/>
   <meta name="url" property="og:url" content="https://bruno.ravanhani.com"/>
-  <meta name="description" property="og:description" content="Página pessoal de Bruno Ravanhani"/>
+  <meta name="description" property="og:description" content="Bruno Ravanhani"/>
 
   <link rel="canonical" href="https://bruno.ravanhani.com/">
   <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" integrity="sha384-T3c6CoIi6uLrA9TneNEoa7RxnatzjcDSCmG1MXxSR1GAsXEV/Dwwykc2MPK8M2HN" crossorigin="anonymous">
@@ -19,33 +19,33 @@
   <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
   
   <!-- Favicons -->
-  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon.png">
-  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32.png">
-  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16.png">
-  <link rel="manifest" href="/images/site.webmanifest">
-  <link rel="mask-icon" href="/images/safari-pinned-tab.svg" color="#5bbad5">
+  <link rel="apple-touch-icon" sizes="180x180" href="images/apple-touch-icon.png">
+  <link rel="icon" type="image/png" sizes="32x32" href="images/favicon-32x32.png">
+  <link rel="icon" type="image/png" sizes="16x16" href="images/favicon-16x16.png">
+  <link rel="manifest" href="images/site.webmanifest">
+  <link rel="mask-icon" href="images/safari-pinned-tab.svg" color="#5bbad5">
   <meta name="msapplication-TileColor" content="#da532c">
   <meta name="theme-color" content="#ffffff">
   
-  <link rel="stylesheet" href="/css/style.css" >
+  <link rel="stylesheet" href="css/style.css" >
 </head>
 <body>
 
  <!-- Header -->
   <header class="bg-dark text-white text-center py-5">
     <h1>Bruno Ravanhani</h1>
-    <p class="lead">Desenvolvedor Fullstack | .NET & React</p>
+    <p class="lead" id="title">Desenvolvedor Fullstack | .NET & React</p>
   </header>
 
   <!-- About Me -->
   <section class="container my-5">
-    <h2>Sobre mim</h2>
-    <p>Sou um desenvolvedor software com quase 10 anos de experiência, minhas especialidades são construir apis com .NET, aplicações front-end com React, bancos de dados relacionais e cloud AWS.</p>
+    <h2 id="aboutMeTitle">Sobre mim</h2>
+    <p id="aboutMe">Sou um desenvolvedor software com quase 10 anos de experiência, minhas especialidades são construir apis com .NET, aplicações front-end com React, bancos de dados relacionais e cloud AWS.</p>
   </section>
 
   <!-- Projetos -->
   <section class="container my-5">
-    <h2>Projetos</h2>
+    <h2 id="projectsTitle">Projetos</h2>
     <div class="row row-cols-1 row-cols-md-2 g-4 mt-3">
       <div class="col">
         <div class="card h-100">
@@ -101,6 +101,39 @@
   <footer class="bg-dark text-white text-center py-3">
     <p>© 2025 Bruno Ravanhani. Todos os direitos reservados.</p>
   </footer>
+
+  <script>
+    function getLanguageTexts() {
+      const languageIndex = navigator.language === 'pt-BR' || navigator.language === 'pt' ? 'pt' : 'en';
+
+      fetch('texts.json')
+        .then(response => {
+          
+          if (!response.ok) {
+            throw new Error(`HTTP error! Status: ${response.status}`);
+          }
+          return response.json();
+        })
+        .then(data => {
+          updateTexts(data[languageIndex])
+        })
+        .catch(error => {
+          console.error('There was a problem with the fetch operation:', error);
+        });
+    }
+
+    function updateTexts(data) {
+      Object.keys(data).forEach((key) => {
+        document.getElementById(key).innerHTML = data[key];
+      });
+
+    }
+
+
+    document.addEventListener("DOMContentLoaded", function() {
+      getLanguageTexts();
+    });
+  </script>
 
 </body>
 </html>
