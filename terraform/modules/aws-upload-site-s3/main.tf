@@ -21,4 +21,8 @@ resource "aws_s3_object" "upload" {
   source = "${var.path}\\${each.value}"
   etag   = filemd5("${var.path}\\${each.value}")
   content_type = lookup(local.content_type_map, split(".", "C:\\Projetos\\Iteris\\aws\\corrida-static\\${each.value}")[1], "text/html")
+
+  provisioner "local-exec" {
+    command = "aws cloudfront create-invalidation --distribution-id ${var.distribution_id} --paths '/*'"
+  }
 }

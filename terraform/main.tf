@@ -21,16 +21,5 @@ module "website_s3_bucket_upload" {
 
   bucket_name = "bruno-ravanhani-static-site"
   path = var.content_path
-}
-
-resource "terraform_data" "clear_cloudfront_cache" {
-  lifecycle {
-    replace_triggered_by = [
-      module.website_s3_bucket_upload
-    ]
-  }
-
-  provisioner "local-exec" {
-    command = "aws cloudfront create-invalidation --distribution-id ${module.website_s3_bucket.distribution_id} --paths '/*'"
-  }
+  distribution_id = module.website_s3_bucket.distribution_id
 }

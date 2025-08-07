@@ -7,3 +7,8 @@ variable "path" {
   description = "Path of the local files"
   type        = string
 }
+
+variable "distribution_id" {
+  description = "Id Cloudfront distribution"
+  type        = string
+}
