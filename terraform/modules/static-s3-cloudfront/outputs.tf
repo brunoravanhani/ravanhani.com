@@ -12,3 +12,8 @@ output "distribution_arn" {
   description = "ARN of the bucket"
   value       = aws_cloudfront_distribution.s3_distribution.arn
 }
+
+output "distribution_id" {
+  description = "ARN of the bucket"
+  value       = aws_cloudfront_distribution.s3_distribution.id
+}
