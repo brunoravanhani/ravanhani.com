@@ -145,8 +145,8 @@ data "aws_iam_policy_document" "github_actions_deploy" {
       "s3:ListBucket",
     ]
     resources = [
-      "arn:aws:s3:::ravanhani-terraform-state",
-      "arn:aws:s3:::ravanhani-terraform-state/*",
+      "arn:aws:s3:::tf-state-bucket-087730237728",
+      "arn:aws:s3:::tf-state-bucket-087730237728/*",
     ]
   }
 
