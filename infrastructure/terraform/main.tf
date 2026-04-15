@@ -15,7 +15,7 @@ terraform {
   # Remote state in S3 — create the bucket and DynamoDB table once
   # with the bootstrap script before running terraform init.
   backend "s3" {
-    bucket         = "ravanhani-terraform-state"
+    bucket         = "tf-state-bucket-087730237728"
     key            = "contact-lambda/terraform.tfstate"
     region         = "us-east-1"
     dynamodb_table = "ravanhani-terraform-locks"
