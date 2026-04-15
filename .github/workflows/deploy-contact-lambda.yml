@@ -1,0 +1,93 @@
+name: Deploy Contact Lambda
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - "infrastructure/**"
+      - ".github/workflows/deploy-contact-lambda.yml"
+  workflow_dispatch:
+
+permissions:
+  id-token: write   # Required for OIDC authentication with AWS
+  contents: read
+
+jobs:
+  deploy:
+    name: Terraform Deploy
+    runs-on: ubuntu-latest
+    environment: production
+
+    defaults:
+      run:
+        shell: bash
+
+    steps:
+      # ── Checkout ────────────────────────────────────────────────────────────
+      - name: Checkout repository
+        uses: actions/checkout@v4
+
+      # ── Node.js & Lambda dependencies ───────────────────────────────────────
+      - name: Setup Node.js
+        uses: actions/setup-node@v4
+        with:
+          node-version: "22"
+          cache: "npm"
+          cache-dependency-path: infrastructure/lambda/package-lock.json
+
+      - name: Install Lambda production dependencies
+        run: npm ci --omit=dev
+        working-directory: infrastructure/lambda
+
+      # ── AWS credentials via OIDC (no long-lived keys) ───────────────────────
+      - name: Configure AWS credentials
+        uses: aws-actions/configure-aws-credentials@v4
+        with:
+          role-to-assume: ${{ secrets.AWS_ROLE_TO_ASSUME }}
+          aws-region: ${{ secrets.AWS_REGION || 'us-east-1' }}
+          role-session-name: GitHubActions-ContactLambda
+
+      # ── Terraform ───────────────────────────────────────────────────────────
+      - name: Setup Terraform
+        uses: hashicorp/setup-terraform@v3
+        with:
+          terraform_version: "~1.9"
+
+      - name: Terraform Format Check
+        run: terraform fmt -check -recursive
+        working-directory: infrastructure/terraform
+
+      - name: Terraform Init
+        run: terraform init
+        working-directory: infrastructure/terraform
+
+      - name: Terraform Validate
+        run: terraform validate
+        working-directory: infrastructure/terraform
+
+      - name: Terraform Plan
+        id: plan
+        run: |
+          terraform plan \
+            -var="personal_email=${{ secrets.PERSONAL_EMAIL }}" \
+            -var="ses_from_email=${{ secrets.SES_FROM_EMAIL }}" \
+            -var="allowed_origins=${{ secrets.ALLOWED_ORIGINS || 'https://ravanhani.com' }}" \
+            -var="github_org=${{ github.repository_owner }}" \
+            -var="github_repo=${{ github.event.repository.name }}" \
+            -out=tfplan \
+            -detailed-exitcode
+        working-directory: infrastructure/terraform
+        continue-on-error: true
+
+      - name: Fail on plan error
+        if: steps.plan.outputs.exitcode == '1'
+        run: exit 1
+
+      - name: Terraform Apply
+        if: github.ref == 'refs/heads/main' && steps.plan.outputs.exitcode == '2'
+        run: terraform apply -auto-approve tfplan
+        working-directory: infrastructure/terraform
+
+      - name: No changes to apply
+        if: steps.plan.outputs.exitcode == '0'
+        run: echo "No infrastructure changes detected."
