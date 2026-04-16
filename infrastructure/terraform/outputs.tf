@@ -1,6 +1,6 @@
 output "api_endpoint" {
   description = "HTTPS endpoint to POST contact form submissions to."
-  value       = "${aws_apigatewayv2_stage.default.invoke_url}/contact"
+  value       = aws_lambda_function_url.contact_mailer.function_url
 }
 
 output "lambda_function_name" {

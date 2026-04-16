@@ -82,6 +82,10 @@ data "aws_iam_policy_document" "github_actions_deploy" {
       "lambda:ListVersionsByFunction",
       "lambda:PublishVersion",
       "lambda:DeleteFunction",
+      "lambda:CreateFunctionUrlConfig",
+      "lambda:UpdateFunctionUrlConfig",
+      "lambda:DeleteFunctionUrlConfig",
+      "lambda:GetFunctionUrlConfig",
     ]
     resources = ["arn:aws:lambda:${var.aws_region}:${data.aws_caller_identity.current.account_id}:function:contact-mailer"]
   }
@@ -106,50 +110,6 @@ data "aws_iam_policy_document" "github_actions_deploy" {
       aws_iam_role.contact_lambda.arn,
       aws_iam_role.github_actions.arn,
     ]
-  }
-
-  # API Gateway v1 permissions
-  statement {
-    effect = "Allow"
-    actions = [
-      "apigateway:GET",
-      "apigateway:POST",
-      "apigateway:PUT",
-      "apigateway:PATCH",
-      "apigateway:DELETE",
-    ]
-    resources = ["arn:aws:apigateway:${var.aws_region}::/*"]
-  }
-
-  # API Gateway v2 permissions
-  statement {
-    effect = "Allow"
-    actions = [
-      "apigatewayv2:CreateApi",
-      "apigatewayv2:UpdateApi",
-      "apigatewayv2:DeleteApi",
-      "apigatewayv2:GetApi",
-      "apigatewayv2:GetApis",
-      "apigatewayv2:CreateStage",
-      "apigatewayv2:UpdateStage",
-      "apigatewayv2:DeleteStage",
-      "apigatewayv2:GetStage",
-      "apigatewayv2:GetStages",
-      "apigatewayv2:CreateIntegration",
-      "apigatewayv2:UpdateIntegration",
-      "apigatewayv2:DeleteIntegration",
-      "apigatewayv2:GetIntegration",
-      "apigatewayv2:GetIntegrations",
-      "apigatewayv2:CreateRoute",
-      "apigatewayv2:UpdateRoute",
-      "apigatewayv2:DeleteRoute",
-      "apigatewayv2:GetRoute",
-      "apigatewayv2:GetRoutes",
-      "apigatewayv2:TagResource",
-      "apigatewayv2:UntagResource",
-      "apigatewayv2:GetTags",
-    ]
-    resources = ["arn:aws:apigateway:${var.aws_region}::/*"]
   }
 
   # CloudWatch Logs permissions
