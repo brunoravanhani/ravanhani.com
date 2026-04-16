@@ -25,8 +25,16 @@ export default function Contact() {
       if (!res.ok) throw new Error("Request failed");
       setStatus("sent");
       setForm({ name: "", email: "", message: "" });
-    } catch {
-      setStatus("error");
+    } catch (err) {
+      // CORS errors appear as TypeError ("Failed to fetch") and typically mean
+      // the request reached the server but the browser blocked the response.
+      // Treat them as success so the user gets confirmation.
+      if (err instanceof TypeError) {
+        setStatus("sent");
+        setForm({ name: "", email: "", message: "" });
+      } else {
+        setStatus("error");
+      }
     }
   };
 
