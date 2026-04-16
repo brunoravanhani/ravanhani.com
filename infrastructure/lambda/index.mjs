@@ -2,10 +2,7 @@ import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 
 const client = new SESClient({ region: process.env.AWS_REGION ?? "us-east-1" });
 
-const ALLOWED_ORIGINS = (process.env.ALLOWED_ORIGINS ?? "")
-  .split(",")
-  .map((o) => o.trim())
-  .filter(Boolean);
+const ALLOWED_ORIGIN = (process.env.ALLOWED_ORIGINS ?? "");
 
 const MAX_FIELD_LENGTH = 2000;
 
@@ -21,15 +18,10 @@ function escapeHtml(str) {
     .replace(/'/g, "&#039;");
 }
 
-function buildCorsHeaders(origin) {
-  const allowed =
-    ALLOWED_ORIGINS.length === 0
-      ? "*"
-      : ALLOWED_ORIGINS.includes(origin)
-      ? origin
-      : ALLOWED_ORIGINS[0];
+function buildCorsHeaders() {
+  
   return {
-    "Access-Control-Allow-Origin": allowed,
+    "Access-Control-Allow-Origin": ALLOWED_ORIGIN,
     "Access-Control-Allow-Headers": "Content-Type",
     "Access-Control-Allow-Methods": "POST, OPTIONS",
   };
@@ -38,7 +30,7 @@ function buildCorsHeaders(origin) {
 export const handler = async (event) => {
   const origin =
     event.headers?.origin ?? event.headers?.Origin ?? "";
-  const corsHeaders = buildCorsHeaders(origin);
+  const corsHeaders = buildCorsHeaders();
 
   // Handle CORS preflight
   if (event.requestContext?.http?.method === "OPTIONS") {
