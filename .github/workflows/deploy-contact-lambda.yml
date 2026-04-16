@@ -74,6 +74,7 @@ jobs:
             -var="allowed_origins=${{ secrets.ALLOWED_ORIGINS || 'https://ravanhani.com' }}" \
             -var="github_org=${{ github.repository_owner }}" \
             -var="github_repo=${{ github.event.repository.name }}" \
+            -var="recaptcha_secret_key=${{ secrets.RECAPTCHA_SECRET_KEY }}" \
             -out=tfplan \
             -detailed-exitcode
         working-directory: infrastructure/terraform
