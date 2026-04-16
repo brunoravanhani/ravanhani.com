@@ -15,10 +15,19 @@ export default function Contact() {
   const handleSubmit = async (e: FormEvent) => {
     e.preventDefault();
     setStatus("sending");
-    // TODO: integrar com serviço de e-mail (ex: Resend, EmailJS, Formspree)
-    await new Promise((r) => setTimeout(r, 1200));
-    setStatus("sent");
-    setForm({ name: "", email: "", message: "" });
+    const apiUrl = process.env.NEXT_PUBLIC_API_URL;
+    try {
+      const res = await fetch(apiUrl!, {
+        method: "POST",
+        headers: { "Content-Type": "application/json" },
+        body: JSON.stringify(form),
+      });
+      if (!res.ok) throw new Error("Request failed");
+      setStatus("sent");
+      setForm({ name: "", email: "", message: "" });
+    } catch {
+      setStatus("error");
+    }
   };
 
   return (
@@ -112,6 +121,12 @@ export default function Contact() {
                   className="w-full bg-[#0f172a] border border-[#334155] focus:border-[#6366f1] text-white placeholder-[#475569] rounded-xl px-4 py-3 text-sm outline-none transition-colors resize-none"
                 />
               </div>
+
+              {status === "error" && (
+                <p className="text-red-400 text-sm">
+                  Ocorreu um erro ao enviar. Tente novamente.
+                </p>
+              )}
 
               <button
                 type="submit"
