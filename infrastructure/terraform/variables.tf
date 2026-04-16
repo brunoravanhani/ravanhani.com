@@ -38,3 +38,9 @@ variable "github_repo" {
   type        = string
   default     = "ravanhani.com"
 }
+
+variable "recaptcha_secret_key" {
+  description = "Google reCAPTCHA v3 secret key used by the Lambda to verify tokens."
+  type        = string
+  sensitive   = true
+}

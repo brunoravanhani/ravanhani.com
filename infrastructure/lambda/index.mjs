@@ -3,8 +3,46 @@ import { SESClient, SendEmailCommand } from "@aws-sdk/client-ses";
 const client = new SESClient({ region: process.env.AWS_REGION ?? "us-east-1" });
 
 const ALLOWED_ORIGIN = (process.env.ALLOWED_ORIGINS ?? "");
+const RECAPTCHA_SECRET = process.env.RECAPTCHA_SECRET_KEY ?? "";
+const MIN_RECAPTCHA_SCORE = 0.5;
 
 const MAX_FIELD_LENGTH = 2000;
+
+// In-memory IP rate limiting: max 3 submissions per IP per 10 minutes.
+// Resets when the Lambda container is recycled, which is acceptable for a
+// personal portfolio contact form.
+const RATE_LIMIT_MAX = 3;
+const RATE_LIMIT_WINDOW_MS = 10 * 60 * 1000;
+/** @type {Map<string, number[]>} */
+const rateLimitStore = new Map();
+
+function isRateLimited(ip) {
+  const now = Date.now();
+  const timestamps = (rateLimitStore.get(ip) ?? []).filter(
+    (t) => now - t < RATE_LIMIT_WINDOW_MS
+  );
+  if (timestamps.length >= RATE_LIMIT_MAX) {
+    rateLimitStore.set(ip, timestamps);
+    return true;
+  }
+  rateLimitStore.set(ip, [...timestamps, now]);
+  return false;
+}
+
+async function verifyRecaptcha(token, ip) {
+  const params = new URLSearchParams({
+    secret: RECAPTCHA_SECRET,
+    response: token,
+    remoteip: ip,
+  });
+  const res = await fetch("https://www.google.com/recaptcha/api/siteverify", {
+    method: "POST",
+    headers: { "Content-Type": "application/x-www-form-urlencoded" },
+    body: params.toString(),
+  });
+  if (!res.ok) return { success: false, score: 0 };
+  return res.json();
+}
 
 /**
  * Escapes HTML special characters to prevent injection in the email body.
@@ -28,13 +66,23 @@ function buildCorsHeaders() {
 }
 
 export const handler = async (event) => {
-  const origin =
-    event.headers?.origin ?? event.headers?.Origin ?? "";
   const corsHeaders = buildCorsHeaders();
+
+  const sourceIp =
+    event.requestContext?.http?.sourceIp ?? "unknown";
 
   // Handle CORS preflight
   if (event.requestContext?.http?.method === "OPTIONS") {
     return { statusCode: 204, headers: corsHeaders, body: "" };
+  }
+
+  // IP rate limiting
+  if (isRateLimited(sourceIp)) {
+    return {
+      statusCode: 429,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: "Too many requests. Please try again later." }),
+    };
   }
 
   // Parse body
@@ -49,7 +97,43 @@ export const handler = async (event) => {
     };
   }
 
-  const { name, email, message } = body;
+  const { name, email, message, website, captchaToken } = body;
+
+  // Honeypot check – bots fill hidden fields, humans don't
+  if (website) {
+    // Return 200 to avoid tipping off the bot
+    return {
+      statusCode: 200,
+      headers: corsHeaders,
+      body: JSON.stringify({ success: true, message: "Your message has been sent!" }),
+    };
+  }
+
+  // reCAPTCHA v3 verification
+  if (!captchaToken || typeof captchaToken !== "string") {
+    return {
+      statusCode: 400,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: "Missing captcha token" }),
+    };
+  }
+  let recaptchaResult;
+  try {
+    recaptchaResult = await verifyRecaptcha(captchaToken, sourceIp);
+  } catch {
+    return {
+      statusCode: 502,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: "Captcha verification failed. Please try again." }),
+    };
+  }
+  if (!recaptchaResult.success || recaptchaResult.score < MIN_RECAPTCHA_SCORE) {
+    return {
+      statusCode: 403,
+      headers: corsHeaders,
+      body: JSON.stringify({ error: "Captcha verification failed. Please try again." }),
+    };
+  }
 
   // Required fields validation
   if (!name || !email || !message) {

@@ -27,9 +27,10 @@ resource "aws_lambda_function" "contact_mailer" {
 
   environment {
     variables = {
-      PERSONAL_EMAIL  = var.personal_email
-      SES_FROM_EMAIL  = var.ses_from_email
-      ALLOWED_ORIGINS = var.allowed_origins
+      PERSONAL_EMAIL       = var.personal_email
+      SES_FROM_EMAIL       = var.ses_from_email
+      ALLOWED_ORIGINS      = var.allowed_origins
+      RECAPTCHA_SECRET_KEY = var.recaptcha_secret_key
     }
   }
 
