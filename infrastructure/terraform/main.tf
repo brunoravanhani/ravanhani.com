@@ -18,7 +18,6 @@ terraform {
     bucket         = "tf-state-bucket-087730237728"
     key            = "contact-lambda/terraform.tfstate"
     region         = "us-east-1"
-    dynamodb_table = "ravanhani-terraform-locks"
     encrypt        = true
   }
 }
